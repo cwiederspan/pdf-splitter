@@ -16,7 +16,7 @@ jobs:
         dotnet-version: 2.2.108
 
     - name: Build with dotnet
-      run: dotnet build ./src --configuration Release
+      run: dotnet build ./src --configuration Release --output ./output
 
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
@@ -28,7 +28,7 @@ jobs:
       id: fa
       with:
         app-name: cdw-pdfsplitter-20191207
-        package: './src/output'
+        package: './output'
 
     - name: 'Write Out Function URL'
       run: |
