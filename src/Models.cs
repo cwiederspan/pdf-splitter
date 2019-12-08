@@ -1,6 +1,16 @@
 using System;
+using System.Collections.Generic;
 
 namespace PdfSplitter.Function {
+
+    public class Result {
+
+        public Result(IList<string> newFiles) {
+            this.files = newFiles;
+        }
+
+        public IList<string> files { get; private set; }
+    }
 
     public class BatchRequest {
 
