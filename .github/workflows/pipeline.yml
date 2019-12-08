@@ -18,18 +18,18 @@ jobs:
     - name: Build with dotnet
       run: dotnet build ./src --configuration Release --output ./output
 
-    - name: 'Login via Azure CLI'
+    - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: 'Publish Azure Function'
+    - name: Publish Azure Function
       uses: Azure/functions-action@v1
-      id: fa
+      id: publish
       with:
-        app-name: cdw-pdfsplitter-20191207
+        app-name: ${{ secrets.FUNCTION_APP_NAME }}
         package: './output'
 
-    - name: 'Write Out Function URL'
+    - name: Write Out Function URL
       run: |
-        echo "${{ steps.fa.outputs.app-url }}"
+        echo "${{ steps.publish.outputs.app-url }}"
